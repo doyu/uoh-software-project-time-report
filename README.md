@@ -17,7 +17,14 @@ pip install uoh_software_project_time_report
 Fill me in please! Don’t forget code examples:
 
 ``` python
-1+1
+pr = Project('key.json')
+pr
 ```
 
-    2
+    1DNoNf4glcuMxKoVzHVrFo-MktmsVji1wf4IHeraWH84
+
+``` python
+pr.get()
+```
+
+    [['name', 'backlog item #', 'hours spent']]
