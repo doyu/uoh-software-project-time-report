@@ -27,4 +27,26 @@ pr
 pr.get()
 ```
 
-    [['name', 'backlog item #', 'hours spent']]
+    [['name', 'backlog item #', 'hours spent', 'date'],
+     ['Hiroshi Doyu', '25', '1', '2022/1/16'],
+     ['Michihito Mizutani', '28', '1', '2022/1/16']]
+
+``` python
+import pandas as pd
+```
+
+``` python
+df = pd.DataFrame(pr.get())
+df.columns = df.iloc[0]
+df = df[1:]
+df['backlog item #'] = df['backlog item #'].astype(int)
+df['hours spent'] = df['hours spent'].astype(int)
+df.date = pd.to_datetime(df.date)
+df.date = df.date.dt.strftime("%Y-%m-%d")
+pr.put([df.columns.tolist()] + df.values.tolist())
+pr.get()
+```
+
+    [['name', 'backlog item #', 'hours spent', 'date'],
+     ['Hiroshi Doyu', '25', '1', '2022/1/16'],
+     ['Michihito Mizutani', '28', '1', '2022/1/16']]
