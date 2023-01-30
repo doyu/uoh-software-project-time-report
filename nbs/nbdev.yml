@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "uoh-software-project-time-report"
+  site-url: "https://doyu.github.io/uoh-software-project-time-report"
+  description: "Time reporting WebApp for software project in UoH"
+  repo-branch: main
+  repo-url: "https://github.com/doyu/uoh-software-project-time-report"
