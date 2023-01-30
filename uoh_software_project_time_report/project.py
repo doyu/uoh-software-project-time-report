@@ -31,8 +31,8 @@ SPREADSHEET_ID = '1DNoNf4glcuMxKoVzHVrFo-MktmsVji1wf4IHeraWH84'
 
 class Project(__Project):
     def __init__(self,
-                fn: str): # service account file name
-        super(Project, self).__init__(SCOPES, SERVICE_ACCOUNT_FILE, SPREADSHEET_ID)
+                fn:str=SERVICE_ACCOUNT_FILE): # service account file name
+        super(Project, self).__init__(SCOPES, fn, SPREADSHEET_ID)
 
 # %% ../nbs/00_project.ipynb 10
 @patch
@@ -53,6 +53,19 @@ def put(self:Project,
     range = f"{sname}!" if sname else ""
     range += "A1"
     request = self.sheet.values().update(spreadsheetId=self.sid,
+                                         range=range,
+                                         valueInputOption="USER_ENTERED",
+                                         body={"values":data})
+    response = request.execute()
+
+# %% ../nbs/00_project.ipynb 16
+@patch
+def append(self:Project,
+        data:list,
+        sname:str="") -> None: # a worksheet name can be specified. If not the 1st sheet is choosen.
+    range = f"{sname}!" if sname else ""
+    range += "A:E"
+    request = self.sheet.values().append(spreadsheetId=self.sid,
                                          range=range,
                                          valueInputOption="USER_ENTERED",
                                          body={"values":data})
