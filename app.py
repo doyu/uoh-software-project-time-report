@@ -29,10 +29,10 @@ with form:
                   "Anastasia C Diseth",
                   ], index=0
     )
-    binum = cols[1].text_input("Backlog item # (meeting=='0'):")
+    binum = cols[1].text_input("Backlog item # (Daily, Review, Retro, Planning is '0'):")
     cols = st.columns(2)
     date = cols[0].date_input("work date:")
-    hours = cols[1].slider("Time spent (hours):", 1., 7.5, step=0.5)
+    hours = cols[1].slider("Time spent (hours):", 0.25, 7.5, step=0.25)
     comment = st.text_area("Comment:")
     submitted = st.form_submit_button(label="Submit")
 
