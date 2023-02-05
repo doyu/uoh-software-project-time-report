@@ -9,7 +9,7 @@ st.write('XXXXX Add dash board with KPI panels here! (e.g. total time spent, rem
 
 st.title("Project Time report!")
 
-pr = Project('keys.json')
+pr = Project()
 
 
 form = st.form(key="annotation")

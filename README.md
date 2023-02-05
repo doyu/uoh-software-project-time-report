@@ -17,9 +17,11 @@ pip install uoh_software_project_time_report
 Fill me in please! Don’t forget code examples:
 
 ``` python
-pr = Project('key.json')
+pr = Project()
 pr
 ```
+
+    2023-02-05 16:21:32.693 INFO    googleapiclient.discovery_cache: file_cache is only supported with oauth2client<4.0.0
 
     1DNoNf4glcuMxKoVzHVrFo-MktmsVji1wf4IHeraWH84
 
@@ -27,9 +29,18 @@ pr
 pr.get()
 ```
 
-    [['name', 'backlog item #', 'hours spent', 'date'],
-     ['Hiroshi Doyu', '25', '1', '2022/1/16'],
-     ['Michihito Mizutani', '28', '1', '2022/1/16']]
+    [['name', 'backlog item #', 'hours spent', 'date', 'comment'],
+     ['Hiroshi Doyu', '0', '2', '2023/1/16', 'Kick-off meeting'],
+     ['Hiroshi Doyu', '25', '0.5', '2023/1/16', 'tflm_hello_world repo'],
+     ['Hiroshi Doyu', '0', '0.25', '2023/1/17', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-19', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-24', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-26', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-31', 'daily'],
+     ['Hiroshi Doyu', '0', '2', '2023-01-20', 'Sprint 0 review'],
+     ['Hiroshi Doyu', '0', '1', '2023-01-23', 'Retro  & Sprint 1 planning'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-02-02', 'Daily'],
+     ['Hiroshi Doyu', '0', '1.5', '2023-02-03', 'Sprint 1 Review & Retro']]
 
 ``` python
 import pandas as pd
@@ -40,13 +51,22 @@ df = pd.DataFrame(pr.get())
 df.columns = df.iloc[0]
 df = df[1:]
 df['backlog item #'] = df['backlog item #'].astype(int)
-df['hours spent'] = df['hours spent'].astype(int)
+df['hours spent'] = df['hours spent'].astype(float)
 df.date = pd.to_datetime(df.date)
 df.date = df.date.dt.strftime("%Y-%m-%d")
 pr.put([df.columns.tolist()] + df.values.tolist())
 pr.get()
 ```
 
-    [['name', 'backlog item #', 'hours spent', 'date'],
-     ['Hiroshi Doyu', '25', '1', '2022/1/16'],
-     ['Michihito Mizutani', '28', '1', '2022/1/16']]
+    [['name', 'backlog item #', 'hours spent', 'date', 'comment'],
+     ['Hiroshi Doyu', '0', '2', '2023/1/16', 'Kick-off meeting'],
+     ['Hiroshi Doyu', '25', '0.5', '2023/1/16', 'tflm_hello_world repo'],
+     ['Hiroshi Doyu', '0', '0.25', '2023/1/17', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-19', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-24', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-26', 'daily'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-01-31', 'daily'],
+     ['Hiroshi Doyu', '0', '2', '2023-01-20', 'Sprint 0 review'],
+     ['Hiroshi Doyu', '0', '1', '2023-01-23', 'Retro  & Sprint 1 planning'],
+     ['Hiroshi Doyu', '0', '0.25', '2023-02-02', 'Daily'],
+     ['Hiroshi Doyu', '0', '1.5', '2023-02-03', 'Sprint 1 Review & Retro']]
