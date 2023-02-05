@@ -5,13 +5,11 @@ GSHEET_URL = "https://docs.google.com/spreadsheets/d/1DNoNf4glcuMxKoVzHVrFo-Mktm
 
 st.set_page_config(page_title="Project Time report", layout="centered")
 
-st.write('XXXXX Add dash board with KPI panels here! (e.g. total time spent, remaining time, velocity, e.t.c)')
+st.title('KPI Dash board')
+st.image('sprint-management.png')
 
-st.title("Project Time report!")
-
+st.markdown("### Report time spent per BI #")
 pr = Project()
-
-
 form = st.form(key="annotation")
 with form:
     cols = st.columns((1, 1))
