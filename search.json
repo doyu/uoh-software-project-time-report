@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "uoh-software-project-time-report",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "uoh-software-project-time-report",
+    "section": "Install",
+    "text": "Install\npip install uoh_software_project_time_report"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "uoh-software-project-time-report",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\npr = Project()\npr\n\n2023-02-05 16:26:46.828 INFO    googleapiclient.discovery_cache: file_cache is only supported with oauth2client<4.0.0\n\n\n1DNoNf4glcuMxKoVzHVrFo-MktmsVji1wf4IHeraWH84\n\n\n\npr.get()\n\n[['name', 'backlog item #', 'hours spent', 'date', 'comment'],\n ['Hiroshi Doyu', '0', '2', '2023/1/16', 'Kick-off meeting'],\n ['Hiroshi Doyu', '25', '0.5', '2023/1/16', 'tflm_hello_world repo'],\n ['Hiroshi Doyu', '0', '0.25', '2023/1/17', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-19', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-24', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-26', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-31', 'daily'],\n ['Hiroshi Doyu', '0', '2', '2023-01-20', 'Sprint 0 review'],\n ['Hiroshi Doyu', '0', '1', '2023-01-23', 'Retro  & Sprint 1 planning'],\n ['Hiroshi Doyu', '0', '0.25', '2023-02-02', 'Daily'],\n ['Hiroshi Doyu', '0', '1.5', '2023-02-03', 'Sprint 1 Review & Retro']]\n\n\n\nimport pandas as pd\n\n\ndf = pd.DataFrame(pr.get())\ndf.columns = df.iloc[0]\ndf = df[1:]\ndf['backlog item #'] = df['backlog item #'].astype(int)\ndf['hours spent'] = df['hours spent'].astype(float)\ndf.date = pd.to_datetime(df.date)\ndf.date = df.date.dt.strftime(\"%Y-%m-%d\")\npr.put([df.columns.tolist()] + df.values.tolist())\npr.get()\n\n[['name', 'backlog item #', 'hours spent', 'date', 'comment'],\n ['Hiroshi Doyu', '0', '2', '2023/1/16', 'Kick-off meeting'],\n ['Hiroshi Doyu', '25', '0.5', '2023/1/16', 'tflm_hello_world repo'],\n ['Hiroshi Doyu', '0', '0.25', '2023/1/17', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-19', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-24', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-26', 'daily'],\n ['Hiroshi Doyu', '0', '0.25', '2023-01-31', 'daily'],\n ['Hiroshi Doyu', '0', '2', '2023-01-20', 'Sprint 0 review'],\n ['Hiroshi Doyu', '0', '1', '2023-01-23', 'Retro  & Sprint 1 planning'],\n ['Hiroshi Doyu', '0', '0.25', '2023-02-02', 'Daily'],\n ['Hiroshi Doyu', '0', '1.5', '2023-02-03', 'Sprint 1 Review & Retro']]"
+  },
+  {
+    "objectID": "project.html",
+    "href": "project.html",
+    "title": "project",
+    "section": "",
+    "text": "source\n\nProject\n\n Project ()\n\nProject (time) data handler\nProject() prints spread sheet id, sid.\n\npr = Project()\n\n2023-02-05 16:26:37.447 INFO    googleapiclient.discovery_cache: file_cache is only supported with oauth2client<4.0.0\n\n\n\nsource\n\n\nProject.get\n\n Project.get (sname:str='')\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nsname\nstr\n\na worksheet name can be specified. If not the 1st sheet is choosen.\n\n\n\nFor instance, here’s some tests of equality\n\npr.get(\"Test\")\n\n[['3/1/2022', '4000'],\n ['4/4/2022', '3000'],\n ['7/12/2022', '7000'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999']]\n\n\n\nsource\n\n\nProject.put\n\n Project.put (data:list, sname:str='')\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ndata\nlist\n\n\n\n\nsname\nstr\n\na worksheet name can be specified. If not the 1st sheet is choosen.\n\n\n\n\npr.get(\"Test\")\n\n[['3/1/2022', '4000'],\n ['4/4/2022', '3000'],\n ['7/12/2022', '7000'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999'],\n ['7/12/2022', '9999']]\n\n\n\ndata = [[\"3/1/2022\", \"4000\"],[\"4/4/2022\", \"3000\"],[\"7/12/2022\", \"7000\"]]\npr.put(data, \"Test\")\ntest_eq(pr.get(\"Test\")[:3], data)\n\n\nsource\n\n\nProject.append\n\n Project.append (data:list, sname:str='')\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\ndata\nlist\n\n\n\n\nsname\nstr\n\n\n\n\nReturns\nNone\n\na worksheet name can be specified. If not the 1st sheet is choosen.\n\n\n\n\ndata = [\"7/12/2022\", \"9999\"]\npr.append([data], \"Test\")\ntest_eq(pr.get(\"Test\")[-1], data)"
+  }
+]
